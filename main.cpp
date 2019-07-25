@@ -6,8 +6,9 @@
 void CreateWindow();
 int main(int argc, char *argv[])
 {
+        QFont * font = new QFont("Microsoft YaHei",10,75);  //设置字体
         QApplication a(argc,argv);
-        //CreateWindow();
+        a.setFont(*font);
         mainwindow m;
         return a.exec();
 }
