@@ -1,8 +1,18 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "draw_frame.h"
-#include "dialog_menus.h"
+#include "exit.h"
+#include "self_location.h"
+#include "caculate_self_location.h"
+#include "engineering_guidance.h"
+#include "data_shows.h"
+#include "save.h"
+#include "device.h"
+#include "communication.h"
+#include "polar.h"
 #include "mybutton.h"
+#include "myspeed.h"
+#include "cthermometer_widget.h"
 #include <QSplitter>
 #include <QTextEdit>
 #include <QPalette>
@@ -17,8 +27,13 @@
 #include <QLabel>
 #include <QFont>
 #include <QIcon>
+#include <QProcess>
+#include <QStringList>
+#include <QObject>
+#include <iostream>
 class mainwindow : public QWidget
 {
+    Q_OBJECT
 private:
     QSplitter * main_bottom;
     QSplitter * main_main;
@@ -53,7 +68,6 @@ private:
     QLabel * edit;
     QFont * font;   //字体
     zhexian * draw;    //中间图形
-    Dialog_Menus * menus;
 
     MyButton * major_enviroment_paramters;               //环境参数
     MyButton * satellite_positions;                      //卫星位置图
@@ -78,5 +92,8 @@ public:
     ~mainwindow();
     void init_left_menus();
     void init_top_menus();
+public slots:
+    void Help_response();                        //帮助按钮的响应函数
+    void Exit_response();                       //退出按钮的响应函数
 };
 #endif // MAINWINDOW_H

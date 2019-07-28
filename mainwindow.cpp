@@ -1,16 +1,14 @@
 #include "mainwindow.h"
 #define inf 0x3f3f3f3f
-mainwindow::mainwindow(QWidget *parent)
-    :QWidget(parent)
+mainwindow::mainwindow(QWidget * parent) : QWidget(parent)
 {
-    setMouseTracking(true);
     font= new QFont();
-    main_bottom = new QSplitter(Qt::Vertical,0);
-    main_operations_details = new QSplitter(Qt::Horizontal,main_bottom);
-    main_operations = new QSplitter(Qt::Horizontal,main_bottom);
-    main_main = new QSplitter(Qt::Horizontal,main_bottom);
-    main_main_middle = new QSplitter(Qt::Horizontal,main_main);
-    main_main_right = new QSplitter(Qt::Horizontal,main_main);
+    main_bottom = new QSplitter(Qt::Vertical,0);                            //最低端信息显示
+    main_operations_details = new QSplitter(Qt::Horizontal,main_bottom);    //次顶端菜单
+    main_operations = new QSplitter(Qt::Horizontal,main_bottom);            //顶端菜单
+    main_main = new QSplitter(Qt::Horizontal,main_bottom);                  //右侧图标
+    main_main_middle = new QSplitter(Qt::Horizontal,main_main);             //左侧菜单
+    main_main_right = new QSplitter(Qt::Horizontal,main_main);              //中部主显示区
 
     init_top_menus();
 
@@ -27,30 +25,64 @@ mainwindow::mainwindow(QWidget *parent)
 
 
     //设定中部显示
-    main_main_widget = new QWidget;
-    main_main_layout = new QVBoxLayout;
-    draw = new zhexian();
-    zhexian * drwa_2 = new zhexian();   //中部显示图形
-    main_main_layout->addWidget(draw);
-    main_main_layout->addWidget(drwa_2);
-    main_main_widget->setLayout(main_main_layout);
-    main_main_right->addWidget(main_main_widget);
+    QWidget * main_main_right_widget = new QWidget;
+    QHBoxLayout * main_main_right_layout = new QHBoxLayout;
+    draw = new zhexian();   //中部显示图形
+    zhexian * draw2 = new zhexian();
+    ChartView *view = new ChartView();
+    ChartView *view2 = new ChartView();
+    QWidget * leftWidget = new QWidget;
+    QVBoxLayout * left_layout = new QVBoxLayout;
+    left_layout->addWidget(draw,1);
+    left_layout->addWidget(view,1);
+    leftWidget->setLayout(left_layout);
+    QWidget * right_Widget = new QWidget;
+    QVBoxLayout * right_layout = new QVBoxLayout;
+    right_layout->addWidget(draw2,1);
+    right_layout->addWidget(view2,1);
+    right_Widget->setLayout(right_layout);
+
+    main_main_right_layout->addWidget(leftWidget,1);
+    main_main_right_layout->addWidget(right_Widget,1);
+    main_main_right_layout->setSpacing(1);
+    main_main_right_widget->setLayout(main_main_right_layout);
+    main_main_right->addWidget(main_main_right_widget);
 
     init_left_menus();
-    main_main_ri = new  QLabel("hello",main_main);
+
+    //右端显示
+    main_main_widget = new QWidget;
+    main_main_layout = new QVBoxLayout;
+    Widget * w = new Widget();
+    cthermometer_widget *c  = new cthermometer_widget();
+    w->setFixedSize(300,300);
+    c->setFixedSize(300,300);
+    main_main_layout->addWidget(w);
+    main_main_layout->addWidget(c);
+    main_main_widget->setLayout(main_main_layout);
+    main_main->addWidget(main_main_widget);
 
 
     QPalette pal(main_bottom->palette());
-    pal.setColor(QPalette::Background,QColor(160,32,240,255));
+    pal.setColor(QPalette::Background,QColor(255,255,255,255));
     main_bottom->setStretchFactor(0,1);
     main_bottom->setStretchFactor(1,1);
-    main_bottom->setStretchFactor(2,30);
+    main_bottom->setStretchFactor(2,60);
     main_bottom->setStretchFactor(3,1);
+    //禁用拉伸效果
+    main_bottom->handle(1)->setDisabled(true);
+    main_bottom->handle(2)->setDisabled(true);
+    main_bottom->handle(3)->setDisabled(true);
+
     main_main->setStretchFactor(0,1);
     main_main->setStretchFactor(1,60);
     main_main->setStretchFactor(2,1);
+    main_main->handle(1)->setDisabled(true);
+    main_main->handle(2)->setDisabled(true);
+
     main_main->setContentsMargins(1,1,1,1);
-    main_bottom->setWindowTitle("client");
+    main_main->setHandleWidth(2);
+    main_bottom->setWindowTitle("大气参数修正服务软件");
     main_bottom->setHandleWidth(2);
     main_bottom->setStyleSheet("QSplitter::handle { background-color: black }");
     main_bottom->setAutoFillBackground(true);   //最大化
@@ -133,7 +165,9 @@ void mainwindow::init_left_menus()
 
     fault_and_status = new MyButton;
     fault_and_status->setText("故障与状态监测");
+    fault_and_status->setStyleSheet("text-align: left;");
     fault_and_status->setFlat(true);
+    fault_and_status->setFont(font);
 
     layout->addWidget(major_enviroment_paramters);
     layout->addWidget(satellite_positions);
@@ -160,67 +194,55 @@ void mainwindow::init_top_menus()
     QWidget * Parameter_Setting_widget = new QWidget;
     QWidget * Help_widget = new QWidget;
     QWidget * Exit_widget = new QWidget;
-    QLabel * System_label = new QLabel("  系统");
-    QLabel * Calibration_and_Observation_label = new QLabel("定标与观测");
-    QLabel * Parameter_Setting_label = new QLabel("参数设定");
-    QLabel * Help_label = new QLabel("  帮助");
-    QLabel * Exit_label = new QLabel("  退出");
+    QLabel * Help_label = new QLabel("帮助");
+    QLabel * Exit_label = new QLabel("退出");
     QVBoxLayout * System_layout = new QVBoxLayout;
     QVBoxLayout * Calibration_and_Observation_layout = new QVBoxLayout;
     QVBoxLayout * Parameter_Setting_layout = new QVBoxLayout;
     QVBoxLayout * Help_layout = new QVBoxLayout;
     QVBoxLayout * Exit_layout = new QVBoxLayout;
 
-    //设定顶端按钮
+//设定顶端按钮
     main_operations_details_widget = new QWidget;
     main_operations_details_layout = new QHBoxLayout;
-    System = new QPushButton;
-    System_icon = new QIcon(":/images/res/system.png");
-    System->setFixedSize(45,45);
-    System->setIcon(*System_icon);
-    System->setIconSize(QSize(40,40));
-
-    Calibration_and_Observation = new QPushButton;
-    Calibration_and_Observation_icon = new QIcon(":/images/res/Calibration_and_Observation.png");
-    Calibration_and_Observation->setFixedSize(45,45);
-    Calibration_and_Observation->setIcon(*Calibration_and_Observation_icon);
-    Calibration_and_Observation->setFlat(true);
-    Calibration_and_Observation->setIconSize(QSize(40,40));
+    System = new QPushButton("系统设定");
+    System->resize(75,30);
+    System->setFont(QFont("Microsoft YaHei", 16, 75));
+    System->setStyleSheet("QPushButton{background: transparent;}");
+    Calibration_and_Observation = new QPushButton("定标与观测");
+    Calibration_and_Observation->resize(75,30);
+    Calibration_and_Observation->setFont(QFont("Microsoft YaHei", 16, 75));
     Calibration_and_Observation->setStyleSheet("QPushButton{background: transparent;}");   //设置点击之后没有阴影
+    Parameter_Setting = new QPushButton("参数设定");
+    Parameter_Setting->resize(75,30);
+    Parameter_Setting->setFont(QFont("Microsoft YaHei", 16, 75));
+    Parameter_Setting->setStyleSheet("QPushButton{background: transparent;}");
 
-    Parameter_Setting = new QPushButton;
-    Parameter_Setting_icon  = new QIcon(":/images/res/Parameter_Setting.png");
-    Parameter_Setting->setFixedSize(45,45);
-    Parameter_Setting->setIcon(*Parameter_Setting_icon);
-    Parameter_Setting->setIconSize(QSize(40,40));
-
-
-    //设定次顶端按钮
+//设定次顶端按钮
     main_operations_Widget = new QWidget();
     main_operations_layout = new QHBoxLayout();
 
     Help = new QPushButton;
     Help_icon = new QIcon(":/images/res/Help.png");
-    Help->setFixedSize(40,40);
+    Help->setFixedSize(20,20);
     Help->setIcon(*Help_icon);
-    Help->setIconSize(QSize(30,30));
+    Help->setIconSize(QSize(20,20));
 
     Exit = new QPushButton;
     Exit_icon = new QIcon(":/images/res/Exit.png");
-    Exit->setFixedSize(40,40);
+    Exit->setFixedSize(20,20);
     Exit->setIcon(*Exit_icon);
-    Exit->setIconSize(QSize(30,30));
+    Exit->setIconSize(QSize(20,20));
 
-    System_layout->addWidget(System);
-    System_layout->addWidget(System_label);
-    Calibration_and_Observation_layout->addWidget(Calibration_and_Observation);
-    Calibration_and_Observation_layout->addWidget(Calibration_and_Observation_label);
-    Parameter_Setting_layout->addWidget(Parameter_Setting);
-    Parameter_Setting_layout->addWidget(Parameter_Setting_label);
-    Help_layout->addWidget(Help);
-    Help_layout->addWidget(Help_label);
-    Exit_layout->addWidget(Exit);
-    Exit_layout->addWidget(Exit_label);
+
+//这里是顶端和次顶端的排版
+    System_layout->addWidget(System,1,Qt::AlignCenter);
+    Calibration_and_Observation_layout->addWidget(Calibration_and_Observation,1,Qt::AlignCenter);
+    Parameter_Setting_layout->addWidget(Parameter_Setting,1,Qt::AlignCenter);
+    Help_layout->addWidget(Help,1,Qt::AlignCenter);
+    Help_layout->addWidget(Help_label,1,Qt::AlignCenter);
+    Exit_layout->addWidget(Exit,1,Qt::AlignCenter);
+    Exit_layout->addWidget(Exit_label,1,Qt::AlignCenter);
 
     System_widget->setLayout(System_layout);
     Calibration_and_Observation_widget->setLayout(Calibration_and_Observation_layout);
@@ -242,4 +264,14 @@ void mainwindow::init_top_menus()
     main_operations_layout->setSpacing(30);
     main_operations_Widget->setLayout(main_operations_layout);
     main_operations->addWidget(main_operations_Widget);
+}
+void mainwindow::Help_response()
+{
+    QProcess *helpProcess = new QProcess(this);
+    QStringList argument("./help.chm");
+    helpProcess->start("hh.exe",argument);
+}
+void mainwindow::Exit_response()
+{
+    exit_confirm e;
 }

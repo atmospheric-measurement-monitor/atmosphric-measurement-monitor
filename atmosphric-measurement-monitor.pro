@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+QT       +=charts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = atmosphric-measurement-monitor
@@ -27,12 +27,40 @@ SOURCES += \
         main.cpp \
     mainwindow.cpp \
     draw_frame.cpp \
-    mybutton.cpp
+    mybutton.cpp \
+    login.cpp \
+    exit.cpp \
+    self_location.cpp \
+    caculate_self_location.cpp \
+    engineering_guidance.cpp \
+    data_shows.cpp \
+    save.cpp \
+    device.cpp \
+    communication.cpp \
+    polar.cpp \
+    myspeed.cpp \
+    cthermoneter.cpp \
+    cthermometer_widget.cpp
 
 HEADERS += \
     mainwindow.h \
     draw_frame.h \
-    mybutton.h
+    mybutton.h \
+    login.h \
+    exit.h \
+    self_location.h \
+    caculate_self_location.h \
+    engineering_guidance.h \
+    data_shows.h \
+    stations.h \
+    save.h \
+    device.h \
+    communication.h \
+    polar.h \
+    myspeed.h \
+    cthermometer.h \
+    cthermometer_widget.h \
+    ui_cthermometer_widget.h
 
 FORMS += \
         mainwindow.ui

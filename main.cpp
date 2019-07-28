@@ -1,4 +1,16 @@
 #include "mainwindow.h"
+#include "login.h"
+#include "exit.h"
+#include "self_location.h"
+#include "caculate_self_location.h"
+#include "engineering_guidance.h"
+#include "data_shows.h"
+#include "save.h"
+#include "device.h"
+#include "communication.h"
+#include "polar.h"
+#include "myspeed.h"
+#include "cthermometer_widget.h"
 #include <QApplication>
 #include <QSplitter>
 #include <QTextEdit>
@@ -9,7 +21,7 @@ int main(int argc, char *argv[])
         QFont * font = new QFont("Microsoft YaHei",10,75);  //设置字体
         QApplication a(argc,argv);
         a.setFont(*font);
-        mainwindow m;
+        login l;
         return a.exec();
 }
 void CreateWindow()
