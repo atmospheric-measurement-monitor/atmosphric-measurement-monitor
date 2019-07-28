@@ -14,6 +14,8 @@ public:
 
 private:
     CThermometer* thermometer;
+    CThermometer* thermometer_1;
+    CThermometer* thermometer_2;
 };
 
 #endif // CTHERMOMETER_WIDGET_H

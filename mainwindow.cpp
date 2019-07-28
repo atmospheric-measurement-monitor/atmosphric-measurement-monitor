@@ -15,7 +15,8 @@ mainwindow::mainwindow(QWidget * parent) : QWidget(parent)
     //设定底端显示
     main_bottom_widget = new QWidget();
     main_bottom_layout = new QHBoxLayout();
-    edit = new  QLabel("无法连接CAN设备");
+    edit = new  QLabel("准备显示的实时信息");
+    edit->setStyleSheet("color: white");
     font->setPointSize(20);
     edit->setFont(*font);
     main_bottom_layout->addWidget(edit);
@@ -53,18 +54,34 @@ mainwindow::mainwindow(QWidget * parent) : QWidget(parent)
     //右端显示
     main_main_widget = new QWidget;
     main_main_layout = new QVBoxLayout;
+    QWidget * bottom_widget = new QWidget;
+    QHBoxLayout * bottom_layout = new QHBoxLayout;
     Widget * w = new Widget();
-    cthermometer_widget *c  = new cthermometer_widget();
-    w->setFixedSize(300,300);
-    c->setFixedSize(300,300);
-    main_main_layout->addWidget(w);
-    main_main_layout->addWidget(c);
+    Widget * w2 = new Widget;
+    //cthermometer_widget *c  = new cthermometer_widget();
+    cthermometer_widget *c1  = new cthermometer_widget();
+    cthermometer_widget *c2  = new cthermometer_widget();
+    w->setFixedSize(200,200);
+    w2->setFixedSize(200,200);
+    c1->setFixedSize(100,320);
+    c2->setFixedSize(100,320);
+    //c->setFixedSize(90,300);
+    //bottom_layout->addWidget(c);
+    bottom_layout->addWidget(c1);
+    bottom_layout->addWidget(c2);
+    bottom_layout->setSpacing(10);
+    bottom_layout->setContentsMargins(0,0,0,0);
+    bottom_widget->setLayout(bottom_layout);
+    main_main_layout->addWidget(w,1);
+    main_main_layout->addWidget(w2,1);
+    main_main_layout->addWidget(bottom_widget,1);
+    main_main_layout->setAlignment(Qt::AlignHCenter);
     main_main_widget->setLayout(main_main_layout);
     main_main->addWidget(main_main_widget);
 
 
     QPalette pal(main_bottom->palette());
-    pal.setColor(QPalette::Background,QColor(255,255,255,255));
+    pal.setColor(QPalette::Background,QColor(0,40,70,255));
     main_bottom->setStretchFactor(0,1);
     main_bottom->setStretchFactor(1,1);
     main_bottom->setStretchFactor(2,60);
@@ -104,70 +121,82 @@ void mainwindow::init_left_menus()
     major_enviroment_paramters = new MyButton;
     major_enviroment_paramters->setText("环境参数");
     major_enviroment_paramters->setFlat(true);
-    major_enviroment_paramters->setStyleSheet("text-align: left;");
+    major_enviroment_paramters->setStyleSheet("text-align: left;color: white;");
     major_enviroment_paramters->setFont(font);
 
     satellite_positions = new MyButton;
     satellite_positions->setText("卫星位置图");
     satellite_positions->setFlat(true);
+    satellite_positions->setStyleSheet("color: white");
 
     ground_temperature = new MyButton;
     ground_temperature->setText("地面温度");
     ground_temperature->setFlat(true);
+    ground_temperature->setStyleSheet("color: white");
 
     ground_humidity = new MyButton;
     ground_humidity->setText("地面湿度");
     ground_humidity->setFlat(true);
+    ground_humidity->setStyleSheet("color: white");
 
     ground_pressure = new MyButton;
     ground_pressure->setText("地面压强");
     ground_pressure->setFlat(true);
+    ground_pressure->setStyleSheet("color: white");
 
     enviroment_paramters_show_all = new MyButton;
     enviroment_paramters_show_all->setText("显示全部");
     enviroment_paramters_show_all->setFlat(true);
+    enviroment_paramters_show_all->setStyleSheet("color: white");
 
     major_error_correction = new MyButton;
     major_error_correction->setText("误差修正");
-    major_error_correction->setStyleSheet("text-align: left;");
+    major_error_correction->setStyleSheet("text-align: left;color: white;");
     major_error_correction->setFlat(true);
     major_error_correction->setFont(font);
 
     distance_error = new MyButton;
     distance_error->setText("典型仰角距离误差");
     distance_error->setFlat(true);
+    distance_error->setStyleSheet("color: white");
 
     angle_error = new MyButton;
     angle_error->setText("典型仰角角度误差");
     angle_error->setFlat(true);
+    angle_error->setStyleSheet("color: white");
 
     error_show_all = new MyButton;
     error_show_all->setText("显示全部");
     error_show_all->setFlat(true);
+    error_show_all->setStyleSheet("color: white");
 
     major_enviroment_data = new MyButton;
     major_enviroment_data->setText("环境数据剖面");
     major_enviroment_data->setFont(font);
-    major_enviroment_data->setStyleSheet("text-align: left;");
+    major_enviroment_data->setStyleSheet("text-align: left;color: white;");
     major_enviroment_data->setFlat(true);
 
     refraction = new MyButton;
     refraction->setText("折射率剖面");
     refraction->setFlat(true);
+    refraction->setStyleSheet("color: white");
 
     electro_density = new MyButton;
     electro_density->setText("电子密度剖面");
     electro_density->setFlat(true);
+    electro_density->setStyleSheet("color: white");
 
     enviroment_data_show_all = new MyButton;
     enviroment_data_show_all->setText("显示全部");
     enviroment_data_show_all->setFlat(true);
+    enviroment_data_show_all->setStyleSheet("color: white");
 
     fault_and_status = new MyButton;
     fault_and_status->setText("故障与状态监测");
     fault_and_status->setStyleSheet("text-align: left;");
     fault_and_status->setFlat(true);
     fault_and_status->setFont(font);
+    fault_and_status->setStyleSheet("color: white");
 
     layout->addWidget(major_enviroment_paramters);
     layout->addWidget(satellite_positions);
@@ -195,7 +224,9 @@ void mainwindow::init_top_menus()
     QWidget * Help_widget = new QWidget;
     QWidget * Exit_widget = new QWidget;
     QLabel * Help_label = new QLabel("帮助");
+    Help_label->setStyleSheet("color: white");
     QLabel * Exit_label = new QLabel("退出");
+    Exit_label->setStyleSheet("color: white");
     QVBoxLayout * System_layout = new QVBoxLayout;
     QVBoxLayout * Calibration_and_Observation_layout = new QVBoxLayout;
     QVBoxLayout * Parameter_Setting_layout = new QVBoxLayout;
@@ -207,16 +238,27 @@ void mainwindow::init_top_menus()
     main_operations_details_layout = new QHBoxLayout;
     System = new QPushButton("系统设定");
     System->resize(75,30);
+    System->setFlat(true);
     System->setFont(QFont("Microsoft YaHei", 16, 75));
     System->setStyleSheet("QPushButton{background: transparent;}");
+    System->setStyleSheet("color: white");
     Calibration_and_Observation = new QPushButton("定标与观测");
     Calibration_and_Observation->resize(75,30);
+    Calibration_and_Observation->setFlat(true);
     Calibration_and_Observation->setFont(QFont("Microsoft YaHei", 16, 75));
     Calibration_and_Observation->setStyleSheet("QPushButton{background: transparent;}");   //设置点击之后没有阴影
+    Calibration_and_Observation->setStyleSheet("color: white");
     Parameter_Setting = new QPushButton("参数设定");
     Parameter_Setting->resize(75,30);
+    Parameter_Setting->setFlat(true);
     Parameter_Setting->setFont(QFont("Microsoft YaHei", 16, 75));
     Parameter_Setting->setStyleSheet("QPushButton{background: transparent;}");
+    Parameter_Setting->setStyleSheet("color: white");
+
+    //QLabel * title = new QLabel("大气参数修正服务软件");
+    //title->resize(200,30);
+    //title->setFont(QFont("Microsoft YaHei", 16, 75));
+    //title->setStyleSheet("color: white");
 
 //设定次顶端按钮
     main_operations_Widget = new QWidget();
@@ -227,7 +269,7 @@ void mainwindow::init_top_menus()
     Help->setFixedSize(20,20);
     Help->setIcon(*Help_icon);
     Help->setIconSize(QSize(20,20));
-
+    connect(Help,SIGNAL(clicked(bool)),this,SLOT(Help_response()));
     Exit = new QPushButton;
     Exit_icon = new QIcon(":/images/res/Exit.png");
     Exit->setFixedSize(20,20);
@@ -253,6 +295,7 @@ void mainwindow::init_top_menus()
     main_operations_details_layout->addWidget(System_widget);
     main_operations_details_layout->addWidget(Calibration_and_Observation_widget);
     main_operations_details_layout->addWidget(Parameter_Setting_widget);
+    //main_operations_details_layout->addWidget(title);
     main_operations_details_layout->setAlignment(Qt::AlignLeft);
     main_operations_details_layout->setSpacing(70);
     main_operations_details_widget->setLayout(main_operations_details_layout);

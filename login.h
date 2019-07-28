@@ -11,16 +11,23 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QObject>
+#include <QLabel>
 class login : public QObject
 {
     Q_OBJECT
 private:
     QWidget * window;
     QWidget * button_widget;
+    QWidget * username_widget;
+    QWidget * password_widget;
     QVBoxLayout * window_layout;
+    QHBoxLayout * username_layout;
+    QHBoxLayout * password_layout;
     QHBoxLayout * Button_layout;
     QLineEdit * username;
     QLineEdit * password;
+    QLabel * username_label;
+    QLabel * password_label;
     QPushButton * login_button;
     QPushButton * exit_botton;
 public:
