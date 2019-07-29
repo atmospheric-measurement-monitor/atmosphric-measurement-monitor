@@ -1,6 +1,7 @@
 //这是温度本体
-#ifndef CTHERMONETER_H
-#define CTHERMONETER_H
+#ifndef CTHERMOMETER_H
+#define CTHERMOMETER_H
+
 #include <QWidget>
 #include <QPropertyAnimation>
 
@@ -15,7 +16,7 @@ class CThermometer : public QWidget
 public:
     enum PRECISION{ //精度(分度值)
         E_ONE = 1,      //一度
-        E_TWO,          //两度
+        E_TWO=2,          //两度
         E_FIVE = 5      //五度
     };
     explicit CThermometer(QWidget *parent = 0);
@@ -78,4 +79,4 @@ private:
 
 };
 
-#endif // CTHERMONETER_H
+#endif // CTHERMOMETER_H

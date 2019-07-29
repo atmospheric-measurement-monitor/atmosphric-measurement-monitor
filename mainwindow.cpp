@@ -28,18 +28,18 @@ mainwindow::mainwindow(QWidget * parent) : QWidget(parent)
     //设定中部显示
     QWidget * main_main_right_widget = new QWidget;
     QHBoxLayout * main_main_right_layout = new QHBoxLayout;
-    draw = new zhexian();   //中部显示图形
-    zhexian * draw2 = new zhexian();
-    ChartView *view = new ChartView();
+    draw = new View();   //中部显示图形
+    View * shibo = new View();
+    ChartView *view_ = new ChartView();
     ChartView *view2 = new ChartView();
     QWidget * leftWidget = new QWidget;
     QVBoxLayout * left_layout = new QVBoxLayout;
     left_layout->addWidget(draw,1);
-    left_layout->addWidget(view,1);
+    left_layout->addWidget(view_,1);
     leftWidget->setLayout(left_layout);
     QWidget * right_Widget = new QWidget;
     QVBoxLayout * right_layout = new QVBoxLayout;
-    right_layout->addWidget(draw2,1);
+    right_layout->addWidget(shibo,1);
     right_layout->addWidget(view2,1);
     right_Widget->setLayout(right_layout);
 
@@ -56,21 +56,22 @@ mainwindow::mainwindow(QWidget * parent) : QWidget(parent)
     main_main_layout = new QVBoxLayout;
     QWidget * bottom_widget = new QWidget;
     QHBoxLayout * bottom_layout = new QHBoxLayout;
-    Widget * w = new Widget();
+    Widget * w = new Widget;
     Widget * w2 = new Widget;
     //cthermometer_widget *c  = new cthermometer_widget();
-    cthermometer_widget *c1  = new cthermometer_widget();
+    //cthermometer_widget *c1  = new cthermometer_widget();
     cthermometer_widget *c2  = new cthermometer_widget();
-    w->setFixedSize(200,200);
-    w2->setFixedSize(200,200);
-    c1->setFixedSize(100,320);
-    c2->setFixedSize(100,320);
+    w->setFixedSize(150,150);
+    w2->setFixedSize(150,150);
+    //c1->setFixedSize(100,320);
+    c2->setFixedSize(200,300);
     //c->setFixedSize(90,300);
     //bottom_layout->addWidget(c);
-    bottom_layout->addWidget(c1);
+    //bottom_layout->addWidget(c1);
     bottom_layout->addWidget(c2);
     bottom_layout->setSpacing(10);
     bottom_layout->setContentsMargins(0,0,0,0);
+    bottom_layout->setAlignment(Qt::AlignCenter);
     bottom_widget->setLayout(bottom_layout);
     main_main_layout->addWidget(w,1);
     main_main_layout->addWidget(w2,1);

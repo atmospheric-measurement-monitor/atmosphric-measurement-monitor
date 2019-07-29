@@ -40,7 +40,9 @@ SOURCES += \
     polar.cpp \
     myspeed.cpp \
     cthermoneter.cpp \
-    cthermometer_widget.cpp
+    cthermometer_widget.cpp \
+    view.cpp \
+    callout.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -60,7 +62,9 @@ HEADERS += \
     myspeed.h \
     cthermometer.h \
     cthermometer_widget.h \
-    ui_cthermometer_widget.h
+    ui_cthermometer_widget.h \
+    view.h \
+    callout.h
 
 FORMS += \
         mainwindow.ui

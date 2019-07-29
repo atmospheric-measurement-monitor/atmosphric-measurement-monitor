@@ -1,6 +1,7 @@
 #include "cthermometer.h"
 #include <QPainter>
 #include <QDebug>
+
 CThermometer::CThermometer(QWidget *parent) : QWidget(parent)
 {
     initData();
@@ -211,7 +212,6 @@ void CThermometer::initData()
     m_minValue = -30;
     m_value = 1;
     m_precision = E_TWO;
-
     m_width = 8;
     m_nPadTop = 25;
     m_nPadBottom = 40;

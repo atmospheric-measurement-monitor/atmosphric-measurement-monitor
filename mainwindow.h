@@ -13,6 +13,8 @@
 #include "mybutton.h"
 #include "myspeed.h"
 #include "cthermometer_widget.h"
+#include "callout.h"
+#include "view.h"
 #include <QSplitter>
 #include <QTextEdit>
 #include <QPalette>
@@ -67,7 +69,7 @@ private:
     QLabel  * top;
     QLabel * edit;
     QFont * font;   //字体
-    zhexian * draw;    //中间图形
+    View * draw;    //中间图形
 
     MyButton * major_enviroment_paramters;               //环境参数
     MyButton * satellite_positions;                      //卫星位置图

@@ -10,31 +10,32 @@ QT_CHARTS_USE_NAMESPACE
 ChartView::ChartView(QWidget *parent)
     : QChartView(parent)
 {
-    const qreal angularMin = 0;
-    const qreal angularMax = 360;
+    const qreal angularMin = -10;
+    const qreal angularMax = 10;
 
-    const qreal radialMin = 0;
-    const qreal radialMax = 360;
+    const qreal radialMin = -10;
+    const qreal radialMax = 10;
 
     QScatterSeries *series1 = new QScatterSeries();
     series1->setName("Satellite Position");
-    for (int i = angularMin; i <= angularMax; i += 10)
-        series1->append(i, (i / radialMax) * radialMax + 8.0);
+    series1->append(3,4);
+    series1->append(-2,6);
+    series1->append(-1,5);
+    series1->append(6,9);
+    series1->append(8,3);
+    series1->append(7,-5);
 
 
 
     QPolarChart *chart = new QPolarChart();
-    //![1]
+
     chart->addSeries(series1);
 
-
-
-    //![2]
     QValueAxis *angularAxis = new QValueAxis();
     angularAxis->setTickCount(9); // First and last ticks are co-located on 0/360 angle.
     angularAxis->setLabelFormat("%.1f");
     angularAxis->setShadesVisible(true);
-    angularAxis->setShadesBrush(QBrush(QColor(0,134,139)));
+    angularAxis->setShadesBrush(QBrush(QColor(139,129,76)));
     chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
 
     QValueAxis *radialAxis = new QValueAxis();
@@ -50,8 +51,10 @@ ChartView::ChartView(QWidget *parent)
     radialAxis->setRange(radialMin, radialMax);
     angularAxis->setRange(angularMin, angularMax);
     this->setChart(chart);
+    //this->setMinimumSize(700,700);
     this->setRenderHint(QPainter::Antialiasing);
 }
+
 void ChartView::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
@@ -78,4 +81,3 @@ void ChartView::keyPressEvent(QKeyEvent *event)
         break;
     }
 }
-
