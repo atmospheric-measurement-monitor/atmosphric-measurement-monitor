@@ -64,12 +64,12 @@ mainwindow::mainwindow(QWidget * parent) : QWidget(parent)
     w->setFixedSize(150,150);
     w2->setFixedSize(150,150);
     //c1->setFixedSize(100,320);
-    c2->setFixedSize(200,300);
+    c2->setFixedSize(150,300);
     //c->setFixedSize(90,300);
     //bottom_layout->addWidget(c);
     //bottom_layout->addWidget(c1);
     bottom_layout->addWidget(c2);
-    bottom_layout->setSpacing(10);
+    bottom_layout->setSpacing(50);
     bottom_layout->setContentsMargins(0,0,0,0);
     bottom_layout->setAlignment(Qt::AlignCenter);
     bottom_widget->setLayout(bottom_layout);

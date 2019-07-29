@@ -13,7 +13,7 @@ login::login()
     username = new QLineEdit("Admin");
     password = new QLineEdit("Admin");
     username_label = new QLabel("用户名");
-    password_label = new QLabel("密码   ");
+    password_label = new QLabel(" 密码  ");
     password->setEchoMode(QLineEdit::Password);                 //设置密码不可见
     login_button = new QPushButton("登录");
     exit_botton = new QPushButton("退出");
@@ -27,6 +27,7 @@ login::login()
     password_widget->setLayout(password_layout);
     Button_layout -> addWidget(login_button);
     Button_layout->addWidget(exit_botton);
+    Button_layout->setSpacing(-5);
     button_widget->setLayout(Button_layout);
     window_layout->addWidget(username_widget);
     window_layout->addWidget(password_widget);

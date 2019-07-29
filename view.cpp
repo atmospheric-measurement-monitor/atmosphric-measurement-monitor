@@ -21,7 +21,7 @@ View::View(QWidget *parent)
 
     // chart
     m_chart = new QChart;
-    m_chart->setMinimumSize(640, 480);
+    //m_chart->setMinimumSize(640, 480);
     m_chart->setTitle("Hover the line to show callout. Click the line to make it stay");
     m_chart->legend()->hide();
     QLineSeries *series = new QLineSeries;
